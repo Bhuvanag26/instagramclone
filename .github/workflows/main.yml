@@ -76,12 +76,12 @@ jobs:
             context: ./
             file: ./Dockerfile
             push: true
-            tags: ${{ secrets.DOCKERHUB_USERNAME }}/instaclone:latest
+            tags: ${{ secrets.DOCKERHUB_USERNAME }}/instaclone:${{ steps.tag_version.outputs.new_tag }}
           
         - name: Run the image in a container
           uses: addnab/docker-run-action@v3
           with:
-            image: ${{ secrets.DOCKERHUB_USERNAME }}/instaclone:latest
+            image: ${{ secrets.DOCKERHUB_USERNAME }}/instaclone:${{ steps.tag_version.outputs.new_tag }}
             run: |
               echo "runing the docker image"
               echo "Testing the nodejs  app endpoints"
